@@ -6,9 +6,9 @@ An advanced micro-tasking platform inspired by sites like Picoworkers and Clickw
 
 ## 🌐 Live Site & GitHub Links
 
-- 🔗 **Live Site**: [https://microtasker.web.app](https://microtasker.web.app)  
+- 🔗 **Live Site**: [https://mini-hive-client.web.app/](https://mini-hive-client.web.app/)  
 - 💻 **Client Repository**: [Client GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba)  
-- ⚙️ **Server Repository**: [Server GitHub](https://github.com/Kaniz-Naiba/microtask-server)
+- ⚙️ **Server Repository**: [Server GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-Kaniz-Naiba)
 
 ---
 
