@@ -78,7 +78,7 @@ const AddTask = () => {
       const auth = getAuth();
       const token = await auth.currentUser.getIdToken();
 
-      const res = await axios.post(`http://localhost:5000/tasks`, taskData, {
+      const res = await axios.post(`https://mini-hive-server.vercel.app/tasks`, taskData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

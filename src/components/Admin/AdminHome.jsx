@@ -23,7 +23,7 @@ export default function AdminHome() {
 
       try {
         const token = await user.getIdToken();
-        const res = await fetch("http://localhost:5000/admin/stats", {
+        const res = await fetch("https://mini-hive-server.vercel.app/admin/stats", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

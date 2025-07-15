@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUserProfile = async (email) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/users/profile?email=${email}`
+        `https://mini-hive-server.vercel.app/users/profile?email=${email}`
       );
       return response.data;
     } catch (error) {

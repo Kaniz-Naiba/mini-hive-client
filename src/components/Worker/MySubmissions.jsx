@@ -40,7 +40,7 @@ function MySubmissions() {
 
         const token = await user.getIdToken();
 
-        const res = await fetch(`http://localhost:5000/submissions?email=${workerEmail}`, {
+        const res = await fetch(`https://mini-hive-server.vercel.app/submissions?email=${workerEmail}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -37,7 +37,7 @@ const DashboardLayout = () => {
 
         const token = await currentUser.getIdToken();
 
-        const res = await fetch("http://localhost:5000/api/notifications", {
+        const res = await fetch("https://mini-hive-server.vercel.app/api/notifications", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

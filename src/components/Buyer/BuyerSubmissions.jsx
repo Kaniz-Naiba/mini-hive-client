@@ -16,7 +16,7 @@ const BuyerSubmissions = () => {
     try {
       const token = await user.getIdToken();
       const res = await fetch(
-        `http://localhost:5000/api/buyer/pending-submissions?email=${buyerEmail}`,
+        `https://mini-hive-server.vercel.app/api/buyer/pending-submissions?email=${buyerEmail}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ const BuyerSubmissions = () => {
   try {
     const token = await user.getIdToken();
     const res = await fetch(
-      `http://localhost:5000/buyer/submissions/${submissionId}/approve`,
+      `https://mini-hive-server.vercel.app/buyer/submissions/${submissionId}/approve`,
       {
         method: "PATCH",
         headers: {
@@ -80,7 +80,7 @@ const handleReject = async (submissionId) => {
   try {
     const token = await user.getIdToken();
     const res = await fetch(
-      `http://localhost:5000/buyer/submissions/${submissionId}/reject`,
+      `https://mini-hive-server.vercel.app/buyer/submissions/${submissionId}/reject`,
       {
         method: "PATCH",
         headers: {

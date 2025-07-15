@@ -97,7 +97,7 @@ const Register = () => {
 
       const coins = role === "buyer" ? 50 : 10;
 
-      await axios.post(`http://localhost:5000/users`, {
+      await axios.post(`https://mini-hive-server.vercel.app/users`, {
         name,
         email,
         photo: photoURL,

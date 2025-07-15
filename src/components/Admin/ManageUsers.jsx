@@ -25,7 +25,7 @@ export default function ManageUsers() {
       try {
         const token = await currentUser.getIdToken();
 
-        const res = await fetch("http://localhost:5000/admin/users", {
+        const res = await fetch("https://mini-hive-server.vercel.app/admin/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -74,7 +74,7 @@ export default function ManageUsers() {
 
       const token = await currentUser.getIdToken();
 
-      const res = await fetch(`http://localhost:5000/admin/users/${email}/role`, {
+      const res = await fetch(`https://mini-hive-server.vercel.app/admin/users/${email}/role`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +120,7 @@ export default function ManageUsers() {
 
       const token = await currentUser.getIdToken();
 
-      const res = await fetch(`http://localhost:5000/admin/users/${email}`, {
+      const res = await fetch(`https://mini-hive-server.vercel.app/admin/users/${email}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

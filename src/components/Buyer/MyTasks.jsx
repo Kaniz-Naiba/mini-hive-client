@@ -14,7 +14,7 @@ const MyTasks = () => {
       const auth = getAuth();
       const token = await auth.currentUser.getIdToken();
       const res = await axios.get(
-        `http://localhost:5000/buyer-tasks?email=${user.email}`,
+        `https://mini-hive-server.vercel.app/buyer-tasks?email=${user.email}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -72,12 +72,12 @@ const MyTasks = () => {
       const auth = getAuth();
       const token = await auth.currentUser.getIdToken();
 
-      await axios.delete(`http://localhost:5000/tasks/${task._id}`, {
+      await axios.delete(`https://mini-hive-server.vercel.app/tasks/${task._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       await axios.patch(
-        `http://localhost:5000/refund-coins`,
+        `https://mini-hive-server.vercel.app/refund-coins`,
         {
           email: user.email,
           coins: refillAmount,
@@ -103,7 +103,7 @@ const MyTasks = () => {
       const token = await auth.currentUser.getIdToken();
 
       await axios.patch(
-        `http://localhost:5000/tasks/${editingTask._id}`,
+        `https://mini-hive-server.vercel.app/tasks/${editingTask._id}`,
         { task_title, task_detail, submission_info },
         {
           headers: { Authorization: `Bearer ${token}` },

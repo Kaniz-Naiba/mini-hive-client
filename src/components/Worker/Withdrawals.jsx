@@ -16,7 +16,7 @@ const WithdrawalForm = () => {
     if (!user?.email) return;
 
     // Fetch user profile or coins (adjust API endpoint accordingly)
-    fetch(`http://localhost:5000/users/profile?email=${user.email}`)
+    fetch(`https://mini-hive-server.vercel.app/users/profile?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setCoins(data.coins || 0);
@@ -68,7 +68,7 @@ const WithdrawalForm = () => {
     try {
       const token = await user.getIdToken();
 
-      const res = await fetch("http://localhost:5000/withdrawals", {
+      const res = await fetch("https://mini-hive-server.vercel.app/withdrawals", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

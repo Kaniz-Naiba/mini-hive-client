@@ -28,7 +28,7 @@ export default function ManageTasks() {
 
       const token = await currentUser.getIdToken();
 
-      const res = await fetch("http://localhost:5000/admin/tasks", {
+      const res = await fetch("https://mini-hive-server.vercel.app/admin/tasks", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -70,7 +70,7 @@ export default function ManageTasks() {
       const token = await currentUser.getIdToken();
 
       const res = await fetch(
-        `http://localhost:5000/api/admin/tasks/${taskId}`,
+        `https://mini-hive-server.vercel.app/api/admin/tasks/${taskId}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },

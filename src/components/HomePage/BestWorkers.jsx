@@ -17,7 +17,7 @@ export default function BestWorkers() {
     
     AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
 
-    fetch(`http://localhost:5000/top-workers`)
+    fetch(`https://mini-hive-server.vercel.app/top-workers`)
       .then(res => res.json())
       .then(data => setWorkers(data))
       .catch(err => console.error('Failed to load top workers:', err));
