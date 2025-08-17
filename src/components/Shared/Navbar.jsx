@@ -146,7 +146,7 @@ const Navbar = () => {
                 Logout
               </button>
               <a
-                href="https://github.com/yourusername/microtask-client"
+                href="https://github.com/Kaniz-Naiba/mini-hive-client.git"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
@@ -212,7 +212,7 @@ const Navbar = () => {
               <button
                 onClick={() =>
                   window.open(
-                    "https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba.git",
+                    "https://github.com/Kaniz-Naiba/mini-hive-client.git",
                     "_blank",
                     "noopener,noreferrer"
                   )
