@@ -11,7 +11,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  const developerRepo = "https://github.com/Kaniz-Naiba/mini-hive-client.git";
   const userPhoto = userInfo?.photo || user?.photoURL || "/user-icon.png";
   const coin = userInfo?.coins || 0;
 
@@ -70,7 +69,7 @@ const Navbar = () => {
             <>
               <Link to="/login" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Login</Link>
               <Link to="/register" className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Register</Link>
-              <a href={developerRepo} target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">
+              <a href="https://github.com/Kaniz-Naiba/mini-hive-client" target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">
                 Join as Developer
               </a>
             </>
@@ -82,7 +81,7 @@ const Navbar = () => {
               <span className="text-green-600 font-semibold">Coins: {coin}</span>
               <img src={userPhoto} alt="User" className="w-9 h-9 rounded-full object-cover border" />
               <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Logout</button>
-              <a href={developerRepo} target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">
+              <a href="https://github.com/Kaniz-Naiba/mini-hive-client" target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">
                 Join as Developer
               </a>
             </>
@@ -112,9 +111,9 @@ const Navbar = () => {
             <>
               <Link to="/login" onClick={toggleMenu} className="block text-blue-600 hover:underline">Login</Link>
               <Link to="/register" onClick={toggleMenu} className="block text-red-600 hover:underline">Register</Link>
-              <button onClick={() => window.open(developerRepo, "_blank", "noopener,noreferrer")} className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full">
+              <a href="https://github.com/Kaniz-Naiba/mini-hive-client" target="_blank" rel="noopener noreferrer" className="block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full text-center">
                 Join as Developer
-              </button>
+              </a>
             </>
           ) : (
             <>
@@ -125,9 +124,9 @@ const Navbar = () => {
               <button onClick={() => { handleLogout(); toggleMenu(); }} className="w-full bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
                 Logout
               </button>
-              <button onClick={() => window.open(developerRepo, "_blank", "noopener,noreferrer")} className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full">
+              <a href="https://github.com/Kaniz-Naiba/mini-hive-client" target="_blank" rel="noopener noreferrer" className="block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full text-center">
                 Join as Developer
-              </button>
+              </a>
             </>
           )}
 
