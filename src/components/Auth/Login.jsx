@@ -18,8 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     function handleResize() {
-      setWindowSize({ width: window.innerWidth / 2, height: window.innerHeight }); 
-      // Left half width since left card is half screen
+      setWindowSize({ width: window.innerWidth / 2, height: window.innerHeight });
     }
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -62,7 +61,8 @@ const Login = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Side */}
-      <div className="md:w-1/2 w-full bg-gradient-to-br from-amber-200 to-yellow-400 text-black flex flex-col justify-center items-center px-10 py-16 relative overflow-hidden">
+      <div className="md:w-1/2 w-full bg-gradient-to-br from-amber-200 to-yellow-400 
+                      text-black dark:text-white flex flex-col justify-center items-center px-10 py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/bg.png')] bg-cover bg-center opacity-10 z-0"></div>
 
         {showConfetti && (
@@ -76,19 +76,20 @@ const Login = () => {
 
         <div className="z-10 text-center relative">
           <h1 className="text-4xl font-bold my-4">WELCOME BACK</h1>
-          <p className="max-w-sm text-gray/90">
+          <p className="max-w-sm text-gray-800 dark:text-gray-300">
             Login now and continue working or hiring with ease!
           </p>
         </div>
       </div>
 
       {/* Right Side - Form */}
-      <div className="md:w-1/2 w-full flex justify-center items-center bg-white px-6 py-16">
+      <div className="md:w-1/2 w-full flex justify-center items-center 
+                      bg-white dark:bg-gray-900 px-6 py-16 transition-colors">
         <div className="w-full max-w-sm">
-          <h2 className="text-xl font-semibold text-center text-yellow-600 mb-2">
+          <h2 className="text-xl font-semibold text-center text-yellow-600 dark:text-yellow-400 mb-2">
             Login to Your Account
           </h2>
-          <p className="text-sm text-center text-gray-500 mb-6">
+          <p className="text-sm text-center text-gray-500 dark:text-gray-400 mb-6">
             Enter your credentials to access your account
           </p>
 
@@ -105,7 +106,9 @@ const Login = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-black"
+              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md 
+                         focus:outline-none focus:ring-2 focus:ring-yellow-400 
+                         text-black dark:text-white bg-white dark:bg-gray-800"
             />
 
             <input
@@ -116,7 +119,9 @@ const Login = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-black"
+              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md 
+                         focus:outline-none focus:ring-2 focus:ring-yellow-400 
+                         text-black dark:text-white bg-white dark:bg-gray-800"
             />
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -124,9 +129,10 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-black hover:bg-yellow-500 text-white py-3 rounded-full text-sm font-semibold transition ${
-                loading ? "opacity-60 cursor-not-allowed" : ""
-              }`}
+              className={`w-full bg-black dark:bg-yellow-500 hover:bg-yellow-600 
+                          dark:hover:bg-yellow-600 text-white dark:text-black 
+                          py-3 rounded-full text-sm font-semibold transition 
+                          ${loading ? "opacity-60 cursor-not-allowed" : ""}`}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
@@ -134,7 +140,9 @@ const Login = () => {
 
           <button
             onClick={handleGoogleLogin}
-            className="w-full mt-4 flex items-center justify-center gap-2 border-blue-500 border rounded py-3 px-4 bg-white hover:bg-gray-100 transition text-gray-700"
+            className="w-full mt-4 flex items-center justify-center gap-2 border-blue-500 border rounded 
+                       py-3 px-4 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 
+                       transition text-gray-700 dark:text-gray-300"
           >
             <img
               src="https://i.ibb.co/v4MVCrXD/Google-Icons-09-512.webp"
@@ -144,9 +152,9 @@ const Login = () => {
             <span className="text-sm font-medium">Sign in with Google</span>
           </button>
 
-          <p className="mt-4 text-center text-sm">
+          <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
             Don’t have an account?{" "}
-            <Link to="/register" className="text-blue-600 hover:underline">
+            <Link to="/register" className="text-blue-600 dark:text-blue-400 hover:underline">
               Register here
             </Link>
           </p>

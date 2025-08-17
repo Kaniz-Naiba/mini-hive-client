@@ -1,5 +1,5 @@
 import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
-import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -22,22 +22,15 @@ export default function Footer() {
           <span className="text-2xl font-bold text-yellow-500">MiniHive</span>
         </div>
 
-        {/* Navigation Links */}
+        {/* Footer Links */}
         <div className="flex flex-col md:flex-row items-center gap-6 text-sm">
-          <HashLink
-            smooth
-            to="/#about"
+          <Link
+            to="/privacy-policy"
             className="hover:text-yellow-400 transition duration-300"
           >
-            About Us
-          </HashLink>
-          <HashLink
-            smooth
-            to="/#footer"
-            className="hover:text-yellow-400 transition duration-300"
-          >
-            Contact Us
-          </HashLink>
+            Privacy Policy
+          </Link>
+          <span className="text-gray-400">Contact Us: support@minihive.com</span>
         </div>
 
         {/* Social Icons */}

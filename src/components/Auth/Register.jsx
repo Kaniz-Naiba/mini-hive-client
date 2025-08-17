@@ -116,9 +116,9 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       {/* Left Side */}
-      <div className="md:w-1/2 w-full bg-gradient-to-br from-amber-200 to-yellow-400 text-black flex flex-col justify-center items-center px-10 py-16 relative overflow-hidden">
+      <div className="md:w-1/2 w-full bg-gradient-to-br from-amber-200 to-yellow-400 dark:from-gray-800 dark:to-gray-700 text-black dark:text-white flex flex-col justify-center items-center px-10 py-16 relative overflow-hidden transition-colors duration-300">
         <div className="absolute inset-0 bg-[url('/bg.png')] bg-cover bg-center opacity-10 z-0"></div>
         {showConfetti && (
           <Confetti
@@ -129,21 +129,23 @@ const Register = () => {
           />
         )}
         <div className="z-10 text-center">
-          <h3 className="text-sm font-light tracking-widest uppercase">Nice to see you again</h3>
+          <h3 className="text-sm font-light tracking-widest uppercase">
+            Nice to see you again
+          </h3>
           <h1 className="text-4xl font-bold my-4">WELCOME BACK</h1>
-          <p className="max-w-sm text-black/80">
+          <p className="max-w-sm text-black/80 dark:text-gray-300">
             Register now and start working or hiring with ease!
           </p>
         </div>
       </div>
 
       {/* Right Side - Form */}
-      <div className="md:w-1/2 w-full flex justify-center items-center bg-white px-6 py-16">
+      <div className="md:w-1/2 w-full flex justify-center items-center bg-white dark:bg-gray-800 px-6 py-16 transition-colors duration-300">
         <div className="w-full max-w-sm">
-          <h2 className="text-xl font-semibold text-center text-yellow-600 mb-2">
+          <h2 className="text-xl font-semibold text-center text-yellow-600 dark:text-yellow-400 mb-2">
             Register Account
           </h2>
-          <p className="text-sm text-center text-gray-500 mb-6">
+          <p className="text-sm text-center text-gray-500 dark:text-gray-300 mb-6">
             Fill in your details to create an account
           </p>
 
@@ -153,7 +155,7 @@ const Register = () => {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md"
+              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border dark:border-yellow-400 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-colors duration-300"
               required
             />
 
@@ -162,7 +164,7 @@ const Register = () => {
               placeholder="Email ID"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md"
+              className="w-full pl-3 pr-4 py-3 border border-l-4 border-yellow-500 dark:border-yellow-400 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-colors duration-300"
               required
             />
 
@@ -171,7 +173,7 @@ const Register = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md"
+              className="w-full pl-3 pr-4 py-3 border border-l-4 border-yellow-500 dark:border-yellow-400 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-colors duration-300"
               required
             />
 
@@ -179,7 +181,7 @@ const Register = () => {
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
-              className="w-full border-l-4 border-yellow-500 border p-2 rounded-md"
+              className="w-full border-l-4 border border-yellow-500 dark:border-yellow-400 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-md transition-colors duration-300"
               required
             />
 
@@ -187,25 +189,25 @@ const Register = () => {
               <img
                 src={photoURL}
                 alt="Preview"
-                className="w-20 h-20 object-cover rounded-full mx-auto"
+                className="w-20 h-20 object-cover  rounded-full mx-auto"
               />
             )}
 
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500 border rounded-md"
+              className="w-full pl-3 pr-4 py-3 border-l-4 border-yellow-500  border dark:border-yellow-400 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md transition-colors duration-300"
             >
-              <option value="worker">Worker</option>
+              <option value="worker" className="">Worker</option>
               <option value="buyer">Buyer</option>
             </select>
 
-            <div className="flex justify-between items-center text-sm text-gray-600">
+            <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-300">
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="accent-yellow-500" />
                 Keep me signed in
               </label>
-              <Link to="/login" className="text-yellow-600 hover:underline">
+              <Link to="/login" className="text-yellow-600 dark:text-yellow-400 hover:underline">
                 Already a member?
               </Link>
             </div>
@@ -215,7 +217,7 @@ const Register = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-black hover:bg-yellow-500 text-white py-3 rounded-full text-sm font-semibold transition ${
+              className={`w-full bg-black hover:bg-yellow-500 dark:hover:bg-yellow-400 text-white py-3 rounded-full text-sm font-semibold transition-colors duration-300 ${
                 loading ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >

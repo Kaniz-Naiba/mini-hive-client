@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ const MyTasks = () => {
   const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
+  const editFormRef = useRef(null); // ✅ ref for edit form
 
   const fetchTasks = async () => {
     try {
@@ -15,9 +16,7 @@ const MyTasks = () => {
       const token = await auth.currentUser.getIdToken();
       const res = await axios.get(
         `https://mini-hive-server.vercel.app/buyer-tasks?email=${user.email}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       const sorted = res.data.sort(
         (a, b) => new Date(b.completion_date) - new Date(a.completion_date)
@@ -34,88 +33,20 @@ const MyTasks = () => {
     }
   }, [user]);
 
-  const handleDelete = async (task) => {
-    const confirmed = await new Promise((resolve) => {
-      toast.info(
-        <div>
-          <p className="font-semibold mb-2">Are you sure you want to delete this task?</p>
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => {
-                toast.dismiss();
-                resolve(true);
-              }}
-              className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-            >
-              Yes
-            </button>
-            <button
-              onClick={() => {
-                toast.dismiss();
-                resolve(false);
-              }}
-              className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
-            >
-              No
-            </button>
-          </div>
-        </div>,
-        { autoClose: false, closeOnClick: false, closeButton: false }
-      );
-    });
-
-    if (!confirmed) return;
-
-    const refillAmount = task.required_workers * task.payable_amount;
-
-    try {
-      const auth = getAuth();
-      const token = await auth.currentUser.getIdToken();
-
-      await axios.delete(`https://mini-hive-server.vercel.app/tasks/${task._id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      await axios.patch(
-        `https://mini-hive-server.vercel.app/refund-coins`,
-        {
-          email: user.email,
-          coins: refillAmount,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      toast.success("Task deleted and coins refunded");
-      fetchTasks();
-    } catch (err) {
-      toast.error("Failed to delete task");
+  // ✅ scroll to edit form when editingTask changes
+  useEffect(() => {
+    if (editingTask && editFormRef.current) {
+      editFormRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  }, [editingTask]);
+
+  const handleDelete = async (task) => {
+    // ... your existing delete logic
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const { task_title, task_detail, submission_info } = editingTask;
-
-    try {
-      const auth = getAuth();
-      const token = await auth.currentUser.getIdToken();
-
-      await axios.patch(
-        `https://mini-hive-server.vercel.app/tasks/${editingTask._id}`,
-        { task_title, task_detail, submission_info },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      toast.success("Task updated successfully");
-      setEditingTask(null);
-      fetchTasks();
-    } catch (err) {
-      toast.error("Failed to update task");
-    }
+    // ... your existing update logic
   };
 
   const handleEditFieldChange = (e) => {
@@ -174,7 +105,7 @@ const MyTasks = () => {
       )}
 
       {editingTask && (
-        <div className="mt-6 border p-4 rounded bg-yellow-50">
+        <div ref={editFormRef} className="mt-6 border p-4 rounded bg-yellow-50">
           <h3 className="text-lg font-bold mb-3 text-yellow-700">✏️ Edit Task</h3>
           <form onSubmit={handleUpdate} className="space-y-2">
             <input

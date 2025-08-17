@@ -3,6 +3,16 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../Shared/Loader";
 import { CheckCircle, FileText, Clock, DollarSign } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+  Cell,
+} from "recharts";
 
 const WorkerHome = () => {
   const { user } = useAuth();
@@ -40,14 +50,24 @@ const WorkerHome = () => {
     approvedSubmissions,
   } = workerData;
 
+  // Chart data
+  const chartData = [
+    { name: "Total Submissions", value: totalSubmission },
+    { name: "Pending Submissions", value: totalPendingSubmission },
+    { name: "Total Earnings", value: totalEarning },
+    { name: "Coins", value: coins },
+  ];
+
+  const barColors = ["#F59E0B", "#3B82F6", "#10B981", "#8B5CF6"]; // yellow, blue, green, purple
+
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold text-center text-yellow-600 mb-10">
-        👷 My Profile
+    <div className="p-6 max-w-7xl mx-auto flex flex-col gap-10">
+      <h2 className="text-3xl font-bold text-center text-yellow-600 mb-6">
+        👷 Welcome {user.displayName || user.name || "Worker"}
       </h2>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <SummaryCard
           icon={<FileText className="text-yellow-600" size={28} />}
           title="Total Submissions"
@@ -72,6 +92,31 @@ const WorkerHome = () => {
           value={`${coins} Coins`}
           valueColor="text-purple-600"
         />
+      </div>
+
+      {/* Overview Chart */}
+      <div className="bg-white p-6 rounded-xl shadow">
+        <h3 className="text-2xl font-bold text-gray-700 mb-6 text-center">Overview Chart</h3>
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart
+            data={chartData}
+            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+            barCategoryGap="30%"
+          >
+            <CartesianGrid strokeDasharray="4 4" stroke="#e5e7eb" />
+            <XAxis dataKey="name" tick={{ fontSize: 14, fill: "#374151" }} />
+            <YAxis tick={{ fontSize: 14, fill: "#374151" }} />
+            <Tooltip
+              contentStyle={{ backgroundColor: "#1f2937", borderRadius: "8px", color: "#fff" }}
+              cursor={{ fill: "rgba(0,0,0,0.1)" }}
+            />
+            <Bar dataKey="value" radius={[10, 10, 0, 0]} barSize={50} label={{ position: "top", fill: "#374151", fontWeight: "bold" }}>
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={barColors[index % barColors.length]} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
       {/* Approved Submissions */}
@@ -99,7 +144,6 @@ const WorkerHome = () => {
     </div>
   );
 };
-
 
 const SummaryCard = ({ title, value, icon, valueColor }) => (
   <div className="bg-white border border-gray-100 shadow-md rounded-xl p-5 text-center hover:shadow-lg transition-all">

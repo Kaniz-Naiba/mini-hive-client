@@ -7,17 +7,17 @@ const slides = [
   {
     heading: "Welcome to MicroTasker",
     title: "Earn money by completing small tasks easily.",
-    image: "https://i.ibb.co/WvCPYVVK/businessman-blurred-background-with-people-connection-icon-business-leadership-chart.jpg", 
+    image: "welcome.webp", 
   },
   {
     heading: "Connect with Buyers",
     title: "Find tasks that match your skills and get paid.",
-    image: "https://i.ibb.co/23sxL5bZ/business-plan-concept-3d-rendering.jpg",
+    image: "money.webp",
   },
   {
     heading: "Manage Your Tasks",
     title: "Create, track, and manage your tasks seamlessly.",
-    image: "https://i.ibb.co/3yQCKf84/discussing-mobile-app.jpg",
+    image:"task.webp",
   },
 ];
 
@@ -35,8 +35,8 @@ export default function HeroSlider() {
         infiniteLoop
         showThumbs={false}
         showStatus={false}
-        interval={5000}
-        transitionTime={800}
+        interval={3000}
+        transitionTime={700}
       >
         {slides.map(({ heading, title, image }, idx) => (
           <div

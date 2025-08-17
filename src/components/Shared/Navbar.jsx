@@ -1,16 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { HashLink } from "react-router-hash-link";
-
-
-import { Home, Info, Phone, LayoutDashboard } from "lucide-react";
+import { Home, Info, Phone, LayoutDashboard, Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
   const { user, userInfo, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const userPhoto = userInfo?.photo || user?.photoURL || "/user-icon.png";
   const coin = userInfo?.coins || 0;
@@ -27,22 +26,42 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  // Apply theme on load and when theme changes
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
-    <nav className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50 transition-all">
-      <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+    <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md sticky top-0 w-full z-50 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-  <img src="/mini-hive2.png" alt="MiniHive Logo" className="h-16 w-16 object-contain" />
-  <span className="text-2xl font-bold text-yellow-500">Mini<span  className="text-2xl font-bold text-black">Hive</span></span>
-</Link>
+          <img
+            src="/mini-hive2.png"
+            alt="MiniHive Logo"
+            className="h-14 w-14 object-contain"
+          />
+          <span className="text-2xl font-bold text-yellow-500">
+            Mini
+            <span className="text-2xl font-bold text-black dark:text-white">
+              Hive
+            </span>
+          </span>
+        </Link>
 
-        {/* Hamburger - Mobile Only */}
+        {/* Hamburger (Mobile Only) */}
         <div
           onClick={toggleMenu}
           className="md:hidden flex flex-col gap-[6px] cursor-pointer z-50"
         >
           <span
-            className={`w-6 h-0.5 bg-black transition-transform duration-300 ${
+            className={`w-6 h-0.5 bg-black dark:bg-white transition-transform duration-300 ${
               menuOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
@@ -52,7 +71,7 @@ const Navbar = () => {
             }`}
           />
           <span
-            className={`w-6 h-0.5 bg-black transition-transform duration-300 ${
+            className={`w-6 h-0.5 bg-black dark:bg-white transition-transform duration-300 ${
               menuOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -60,23 +79,26 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-1 text-black hover:text-yellow-500">
+          <Link
+            to="/"
+            className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
+          >
             <Home size={18} /> Home
           </Link>
           <HashLink
             smooth
             to="/#about"
-            className="flex items-center gap-1 text-black hover:text-yellow-500"
+            className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
           >
             <Info size={18} /> About Us
           </HashLink>
-          <HashLink
-            smooth
-            to="/#footer"
-            className="flex items-center gap-1 text-black hover:text-yellow-500"
+         
+          <Link
+            to="/all-tasks"
+            className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
           >
-            <Phone size={18} /> Contact Us
-          </HashLink>
+            All Tasks
+          </Link>
 
           {!user?.email ? (
             <>
@@ -105,7 +127,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/dashboard"
-                className="flex items-center gap-1 text-black hover:text-yellow-500"
+                className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
               >
                 <LayoutDashboard size={18} /> Dashboard
               </Link>
@@ -115,7 +137,7 @@ const Navbar = () => {
               <img
                 src={userPhoto}
                 alt="User"
-                className="w-8 h-8 rounded-full object-cover border"
+                className="w-9 h-9 rounded-full object-cover border"
               />
               <button
                 onClick={handleLogout}
@@ -133,16 +155,24 @@ const Navbar = () => {
               </a>
             </>
           )}
+
+          {/* 🌗 Theme Toggle */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white transition-colors"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t px-4 pb-4 space-y-3">
+        <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 px-4 pb-4 space-y-3 transition-colors">
           <Link
             to="/"
             onClick={toggleMenu}
-            className="flex items-center gap-1 text-black hover:text-yellow-500"
+            className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
           >
             <Home size={18} /> Home
           </Link>
@@ -150,18 +180,18 @@ const Navbar = () => {
             smooth
             to="/#about"
             onClick={toggleMenu}
-            className="flex items-center gap-1 text-black hover:text-yellow-500"
+            className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
           >
             <Info size={18} /> About Us
           </HashLink>
-          <HashLink
-            smooth
-            to="/#footer"
+          
+          <Link
+            to="/all-tasks"
             onClick={toggleMenu}
-            className="flex items-center gap-1 text-black hover:text-yellow-500"
+            className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
           >
-            <Phone size={18} /> Contact Us
-          </HashLink>
+            All Tasks
+          </Link>
 
           {!user?.email ? (
             <>
@@ -179,26 +209,25 @@ const Navbar = () => {
               >
                 Register
               </Link>
-             <button
-  onClick={() =>
-    window.open(
-      "https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba.git",
-      "_blank",
-      "noopener,noreferrer"
-    )
-  }
-  className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
->
-  Join as Developer 
-</button>
-
+              <button
+                onClick={() =>
+                  window.open(
+                    "https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba.git",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+              >
+                Join as Developer
+              </button>
             </>
           ) : (
             <>
               <Link
                 to="/dashboard"
                 onClick={toggleMenu}
-                className="flex items-center gap-1 text-black hover:text-yellow-500"
+                className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
               >
                 <LayoutDashboard size={18} /> Dashboard
               </Link>
@@ -210,25 +239,32 @@ const Navbar = () => {
                   handleLogout();
                   toggleMenu();
                 }}
-                className="w-full bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                className="w-full bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
               >
                 Logout
               </button>
               <button
-  onClick={() =>
-    window.open(
-      "https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba.git",
-      "_blank",
-      "noopener,noreferrer"
-    )
-  }
-  className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
->
-  Join as Developer 
-</button>
-
+                onClick={() =>
+                  window.open(
+                    "https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba.git",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+              >
+                Join as Developer
+              </button>
             </>
           )}
+
+          {/* 🌗 Theme Toggle (Mobile) */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white transition-colors w-full flex items-center justify-center"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
         </div>
       )}
     </nav>
