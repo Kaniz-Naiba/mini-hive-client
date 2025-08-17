@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { HashLink } from "react-router-hash-link";
-import { Home, Info, Phone, LayoutDashboard, Sun, Moon } from "lucide-react";
+import { Home, Info, LayoutDashboard, Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
   const { user, userInfo, logOut } = useContext(AuthContext);
@@ -13,6 +13,8 @@ const Navbar = () => {
 
   const userPhoto = userInfo?.photo || user?.photoURL || "/user-icon.png";
   const coin = userInfo?.coins || 0;
+
+  const developerRepo = "https://github.com/Kaniz-Naiba/mini-hive-client.git";
 
   const handleLogout = async () => {
     try {
@@ -39,7 +41,6 @@ const Navbar = () => {
   return (
     <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md sticky top-0 w-full z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img
@@ -92,7 +93,6 @@ const Navbar = () => {
           >
             <Info size={18} /> About Us
           </HashLink>
-         
           <Link
             to="/all-tasks"
             className="flex items-center gap-1 text-black dark:text-white hover:text-yellow-500 transition-colors"
@@ -115,7 +115,7 @@ const Navbar = () => {
                 Register
               </Link>
               <a
-                href="https://github.com/yourusername/microtask-client"
+                href={developerRepo}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
@@ -131,9 +131,7 @@ const Navbar = () => {
               >
                 <LayoutDashboard size={18} /> Dashboard
               </Link>
-              <span className="text-green-600 font-semibold">
-                Coins: {coin}
-              </span>
+              <span className="text-green-600 font-semibold">Coins: {coin}</span>
               <img
                 src={userPhoto}
                 alt="User"
@@ -146,7 +144,7 @@ const Navbar = () => {
                 Logout
               </button>
               <a
-                href="https://github.com/Kaniz-Naiba/mini-hive-client.git"
+                href={developerRepo}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
@@ -156,7 +154,7 @@ const Navbar = () => {
             </>
           )}
 
-          {/* 🌗 Theme Toggle */}
+          {/* Theme Toggle */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white transition-colors"
@@ -184,7 +182,6 @@ const Navbar = () => {
           >
             <Info size={18} /> About Us
           </HashLink>
-          
           <Link
             to="/all-tasks"
             onClick={toggleMenu}
@@ -210,14 +207,8 @@ const Navbar = () => {
                 Register
               </Link>
               <button
-                onClick={() =>
-                  window.open(
-                    "https://github.com/Kaniz-Naiba/mini-hive-client.git",
-                    "_blank",
-                    "noopener,noreferrer"
-                  )
-                }
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+                onClick={() => window.open(developerRepo, "_blank", "noopener,noreferrer")}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full"
               >
                 Join as Developer
               </button>
@@ -231,9 +222,7 @@ const Navbar = () => {
               >
                 <LayoutDashboard size={18} /> Dashboard
               </Link>
-              <span className="block text-green-600 font-semibold">
-                Coins: {coin}
-              </span>
+              <span className="block text-green-600 font-semibold">Coins: {coin}</span>
               <button
                 onClick={() => {
                   handleLogout();
@@ -244,21 +233,15 @@ const Navbar = () => {
                 Logout
               </button>
               <button
-                onClick={() =>
-                  window.open(
-                    "https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Kaniz-Naiba.git",
-                    "_blank",
-                    "noopener,noreferrer"
-                  )
-                }
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+                onClick={() => window.open(developerRepo, "_blank", "noopener,noreferrer")}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full"
               >
                 Join as Developer
               </button>
             </>
           )}
 
-          {/* 🌗 Theme Toggle (Mobile) */}
+          {/* Theme Toggle (Mobile) */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white transition-colors w-full flex items-center justify-center"
